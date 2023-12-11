@@ -15,9 +15,9 @@ const JWT_SECRET = 'Panchami';
 const pool = mysql.createPool({
     connectionLimit: 10,
     host: 'sql5.freemysqlhosting.net',
-    user: 'sql5665983',
-    password: '2NNRIaQp3w',
-    database: 'sql5665983'
+    user: 'sql5669613',
+    password: 'yMy7wtrxYH',
+    database: 'sql5669613'
 });
 
 app.post('/signup', (req, res) => {
@@ -182,7 +182,7 @@ app.post('/spent', verifyToken, (req, res) => {
 app.get('/budgetData', verifyToken, (req, res) => {
   const userEmail = req.query.email;
   const selectedMonth = req.query.month;
-  const selectedCategory = req.query.category; // Assuming category is passed from frontend
+  const selectedCategory = req.query.category;
 
   pool.getConnection((err, connection) => {
     if (err) {
@@ -225,16 +225,13 @@ app.get('/budgetData', verifyToken, (req, res) => {
   });
 });
 
-// Assuming the necessary imports and setup have been done
 
 app.post('/extend-session',verifyToken,(req, res) => {
-  // Assuming the user's email is available as a query parameter named 'email'
   const userEmail = req.query.email;
 
-  // Generate a new token with extended expiration using the userEmail
-  const newToken = jwt.sign({ email: userEmail }, JWT_SECRET, { expiresIn: 60 }); // Extend to your desired duration
+  const newToken = jwt.sign({ email: userEmail }, JWT_SECRET, { expiresIn: 60 });
 
-  res.status(200).json({ token: newToken }); // Send the new token back to the client
+  res.status(200).json({ token: newToken });
 });
 
 
